@@ -17,6 +17,14 @@ Description:
 
         Install Microsoft Fonts:- In linux, microsoft fonts are not available by default eg. Arial. To use such fonts, microsoft fonts are downloaded.
 
+        Install VLC:- It will install VLC Player in your system.
+        
+        Install Spotify:- It will install Spotify and listen unlimited free songs.
+        
+        Install Filezilla (FTP):- This package helps you to connect to FTP Server.
+        
+        Install Default VPN:- Use Default VPN Software to browse over Internet securely.
+        
         Uninstall Mono and Orco:- This is an optional step. Mono is an implementation of Windows .NET framework, it can pose a potential security risk. In contrast, Orco is an accessibility feature which can be discarded unless you are visually challenged. NOTE: Removing Mono will also remove the mono based application like Tomboy notes app and photo editor app like Pinta.
 
         Install TLP:- TLP is a great command line tool for improving the battery performance fo your laptop. This advanced power management tool comes with automated background tasks which can help you get the most of your battery.
