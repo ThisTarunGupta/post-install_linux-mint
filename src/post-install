@@ -1,0 +1,128 @@
+#!/usr/bin/python3
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Gdk
+
+import os
+
+class MyWindow(Gtk.Window):
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Post-Install")
+        self.set_border_width(10)
+
+        self.grid = Gtk.Grid()
+        self.add(self.grid)
+        
+        self.label1 = Gtk.Label()
+        self.label1.set_markup("<big>INSECTA</big>\n<small>The Programming Bug</small>")
+        self.label1.override_background_color(0, Gdk.RGBA(0,0.75,0.75,1))
+        self.label1.override_color(0, Gdk.RGBA(0,0,0,1))
+
+        self.label2 = Gtk.Label()
+        self.label2.set_markup("<small>Mantainer: Tarun Gupta</small>")
+        self.label2.override_background_color(0, Gdk.RGBA(0,0.75,0.75,1))
+        self.label2.override_color(0, Gdk.RGBA(0,0,0,1))
+        self.label2.set_hexpand(True)
+        self.label2.set_vexpand(True)
+
+        self.label3 = Gtk.Label(label="Please select checkbox: ")
+        
+        self.label4 = Gtk.Label()
+        self.label4.set_markup("<small>** After installing, Reboot your system to take effect</small>")
+        self.label4.set_hexpand(True)
+        self.label4.set_vexpand(True)
+
+        self.check1 = Gtk.CheckButton(label="Update and Upgrade")
+        self.check2 = Gtk.CheckButton(label="Install Complete Multimedia Support")
+        self.check3 = Gtk.CheckButton(label="Install Microsoft Fonts")
+        self.check4 = Gtk.CheckButton(label="Install VLC")
+        self.check5 = Gtk.CheckButton(label="Install Spotify")
+        self.check6 = Gtk.CheckButton(label="Install Filezilla (FTP)")
+        self.check7 = Gtk.CheckButton(label="Install Default VPN Client")
+        self.check8 = Gtk.CheckButton(label="Uninstall Mono and Orco")
+        self.check9 = Gtk.CheckButton(label="Install TLP (Recommended for Laptop)")
+        self.check10 = Gtk.CheckButton(label="Install WINE (For Running EXE files)")
+        
+        self.pbar = Gtk.ProgressBar()
+
+        self.button = Gtk.Button(label="Proceed")
+        self.button.connect("clicked", self.on_button_clicked)
+
+        self.grid.add(self.label1)        
+        self.grid.attach(self.label2, 2, 0, 1, 1)
+        self.grid.attach(self.label3, 0, 1, 1, 1)
+        self.grid.attach(self.check1, 1, 2, 2, 1)
+        self.grid.attach(self.check2, 1, 3, 2, 1)
+        self.grid.attach(self.check3, 1, 4, 2, 1)
+        self.grid.attach(self.check4, 1, 5, 2, 1)
+        self.grid.attach(self.check5, 1, 6, 2, 1)
+        self.grid.attach(self.check6, 1, 7, 2, 1)
+        self.grid.attach(self.check7, 1, 8, 2, 1)
+        self.grid.attach(self.check8, 1, 9, 2, 1)
+        self.grid.attach(self.check9, 1, 10, 2, 1)
+        self.grid.attach(self.check10, 1, 11, 2, 1)
+        self.grid.attach(self.label4, 0, 12, 1, 1)
+        self.grid.attach(self.pbar, 0, 13, 1, 1)
+        self.grid.attach(self.button, 2, 13, 2, 1)
+
+    def on_button_clicked(self, button):
+        value = 1/10
+        
+        if self.check1.get_active():
+            os.system("sudo apt-get update && sudo apt-get upgrade -y")
+            self.pbar.set_fraction(value)
+            value+=value
+
+        if self.check2.get_active():
+            os.system("sudo apt-get install mint-meta-codecs -y")  
+            self.pbar.set_fraction(value)
+            value+=value
+
+        if self.check3.get_active():
+            os.system("sudo apt-get install -y ttf-mscorefonts-installer")
+            self.pbar.set_fraction(value)
+            value+=value
+
+        if self.check4.get_active():
+            os.system("sudo add-apt-repository ppa:videolan/stable-daily && sudo apt-get update && sudo apt-get install -y vlc")  
+            self.pbar.set_fraction(value)
+            value+=value
+            
+        if self.check5.get_active():
+            os.system("sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 && echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt-get update && sudo apt-get install spotify-client")
+            self.pbar.set_fraction(value)
+            value+=value
+            
+        if self.check6.get_active():
+            os.system("sudo apt-get install -y filezilla")
+            self.pbar.set_fraction(value)
+            value+=value
+            
+        if self.check7.get_active():
+            os.system("sudo apt install -y network-manager-openvpn network-manager-openvpn-gnome")
+            self.pbar.set_fraction(value)
+            value+=value
+            
+        if self.check8.get_active():
+            os.system("sudo apt-get remove -y mono-runtime-common gnome-orca")
+            self.pbar.set_fraction(value)
+            value+=value
+
+        if self.check9.get_active():
+            os.system("sudo add-apt-repository ppa:linrunner/tlp && sudo apt-get update && audo apt-get install tlp tlp-rdw -y && sudo tlp start")
+            self.pbar.set_fraction(value)
+            value+=value
+
+        if self.check10.get_active():
+            os.system("sudo dpkg --add-architecture i386 && wget -nc https://dl.winehq.org/wine-builds/winehq.key && sudo apt-key add winehq.key && sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && sudo apt update && sudo apt install --install-recommends winehq-stable")
+            self.pbar.set_fraction(value)
+            value+=value
+
+        self.pbar.set_fraction(1)
+    
+
+win = MyWindow()
+win.connect("destroy", Gtk.main_quit)
+win.show_all()
+Gtk.main()
