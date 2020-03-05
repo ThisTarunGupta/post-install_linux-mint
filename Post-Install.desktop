@@ -1,0 +1,9 @@
+[Desktop Entry]
+
+Name=Post-Install
+Description=Post-installation for Linux Mint or any Debian Based distro
+Exec=bash src/script
+Terminal=false
+Type=Application
+Category=Application
+
